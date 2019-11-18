@@ -3,12 +3,35 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div id="container">
+    <h1>Movies</h1>
+    @foreach (Movie movie in Model.Movies)
+    {
+        <div class="movie-entry">
+            <h4>@movie.Title</h4>
+            <smaller>
+                @(movie.MPAA_Rating ?? $"{@movie.MPAA_Rating}")
+            </smaller>
+            <i>@movie.Major_Genre</i>
+            <div class="ratings">
+                <div>
+                    Rotten Tomatoes
+                    <h1>@movie.Rotten_Tomatoes_Rating</h1>
+                </div>
+                <div>
+                    IMDB
+                    <h1>@movie.IMDB_Rating</h1>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<form method="post">
+    <input type="text" name="search" id="search" />
+    <input type="submit" value="Search" />
 
-    <form method="post">
-        <input type="text" name="search" id="search" />
-        <input type="submit" value="Search" />
-
-        <h2>MPAA Rating</h2>
+    <h2>MPAA Rating</h2>
+    <div class="checkbox-list">
         <label>
             <input type="checkbox" name="rating" value="G" />
             Rated G
@@ -29,27 +52,5 @@
             <input type="checkbox" name="rating" value="NC-17" />
             Rated NC-17
         </label>
-    </form>
-
-<h1>Movies</h1>
-
-@foreach (Movie movie in Model.Movies)
-{
-    <div class="movie-entry">
-        <h4>@movie.Title</h4>
-        <smaller>
-            @(movie.MPAA_Rating ?? $"{@movie.MPAA_Rating}")
-        </smaller>
-        <i>@movie.Major_Genre</i>
-        <div class="ratings">
-            <div>
-                Rotten Tomatoes
-                <h1>@movie.Rotten_Tomatoes_Rating</h1>
-            </div>
-            <div>
-                IMDB
-                <h1>@movie.IMDB_Rating</h1>
-            </div>
-        </div>
     </div>
-}
+</form>
